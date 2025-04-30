@@ -7,7 +7,7 @@ import logging
 from datetime import datetime
 import time
 
-# Set up logging
+# Set up logging here
 def setup_logging():
     log_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "logs")
     if not os.path.exists(log_dir):

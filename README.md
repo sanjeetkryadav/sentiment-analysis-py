@@ -1,8 +1,7 @@
 # sentiment-analysis
 The goal of the project is to determine whether the sentiment expressed in the video is positive, negative, or neutral.
 
-Steps to run the project: 
-
+Steps to run the project:  
 1.	Download any video (audio should be in English) in your local machine.
 2.	Start the application by executing Project.py file
 3.	Input box prompt will be displayed, here enter the path of the video file downloaded.

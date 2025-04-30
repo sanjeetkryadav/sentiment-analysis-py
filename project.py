@@ -28,7 +28,7 @@ def process_video():
             status_label.config(text="Ready")
             return
             
-        # Analyze sentiment
+        # Analyze sentiment -
         sentiment, score, explanation = second()
         if sentiment.startswith("Error"):
             messagebox.showerror("Error", sentiment)

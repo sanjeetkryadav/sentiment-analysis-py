@@ -16,7 +16,7 @@ def analyze_text(text):
         print("Overall: Neutral")
     print("-" * 50)
 
-# Example 1: Strongly Positive
+# Example 1: Strongly Positive -
 text1 = "I absolutely love this product! It's amazing and works perfectly. Best purchase ever!!!"
 analyze_text(text1)
 

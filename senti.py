@@ -36,7 +36,7 @@ def second():
     1. Initialize VADER sentiment analyzer
     2. Read transcribed text from input.txt
     3. Calculate sentiment scores using VADER
-    4. Return sentiment classification, compound score, and detailed explanation
+    4. Return sentiment classification, compound score, and detailed explanation.
     
     Returns:
     - sentiment: String indicating positive/negative/neutral
