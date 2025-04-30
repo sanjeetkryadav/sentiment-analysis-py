@@ -2,6 +2,6 @@ videos/
 theaudio.wav
 logs/
 models/
-_pycache_/
+__pycache__/
 input.txt
 
