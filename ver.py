@@ -39,7 +39,7 @@ def transcribe_chunk(recognizer, audio, chunk_num, max_retries=3):
             # Adjust recognition parameters for better accuracy
             recognizer.dynamic_energy_threshold = True
             recognizer.energy_threshold = 4000  # Adjust this value based on your audio
-            recognizer.pause_threshold = 0.8    # Reduce pause threshold
+            
             
             text = recognizer.recognize_google(audio, language="en-US")
             if text.strip():  # Only return if we got actual text
@@ -69,7 +69,7 @@ def first(file_path):
         logging.info(f"Starting transcription for video: {file_path}")
         
         # Extract audio from video
-        clip = VideoFileClip(file_path)
+        clip = VideoFileClip(file_path).subclip(0,60)
         audio_file = "theaudio.wav"
         clip.audio.write_audiofile(audio_file)
         logging.info(f"Audio extracted and saved as: {audio_file}")
@@ -113,7 +113,7 @@ def first(file_path):
                     full_text.append(f"[Chunk {chunk_num} transcription failed]")
                 
                 # Add a small delay between chunks to prevent API rate limiting
-                time.sleep(1)
+                time.sleep(2)
         
         # Combine all chunks
         final_text = " ".join(full_text)
