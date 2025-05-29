@@ -109,11 +109,13 @@ def process_video():
 # Create main window
 root = Tk()
 root.title("Video Sentiment Analyzer Window")
-root.geometry("600x200")
+root.geometry("600x270")  
 
 # Style
 style = Style()
-style.configure("Heading.TLabel", font=("Helvetica", 12, "bold"))
+style.configure("Heading.TLabel", font=("Helvetica", 14, "bold"))
+style.configure("Status.TLabel", font=("Helvetica", 10), padding=5, anchor="center")
+style.configure("Big.TButton", font=("Helvetica", 10, "bold"), padding=10)
 
 # Main content
 frame = Frame(root, padding="20")
@@ -125,9 +127,13 @@ Label(frame, text="Enter the path to your video file:").pack()
 entry = Entry(frame, width=60)
 entry.pack(pady=10, padx=20, fill=X)
 
-Button(frame, text="Process Video", command=process_video).pack(pady=10)
+Button(frame, text="Process Video", command=process_video, style="Big.TButton").pack(pady=10)
 
-status_label = Label(frame, text="Ready")
-status_label.pack(pady=5)
+# Create a container frame for the status label
+status_frame = Frame(frame)
+status_frame.pack(fill=X, pady=10)
+
+status_label = Label(status_frame, text="Ready", style="Status.TLabel", anchor="center")
+status_label.pack(expand=True, fill=X)
 
 root.mainloop()
