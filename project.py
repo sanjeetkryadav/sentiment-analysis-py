@@ -108,7 +108,7 @@ def process_video():
 
 # Create main window
 root = Tk()
-root.title("Video Sentiment Analyzer")
+root.title("Video Sentiment Analyzer Window")
 root.geometry("600x200")
 
 # Style

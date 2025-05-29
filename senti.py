@@ -3,14 +3,7 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import os
 
 def get_sentiment_explanation(scores):
-    """Returns detailed explanation of sentiment scores
     
-    VADER Sentiment Scores Explanation:
-    - Compound: Normalized score between -1 (most negative) and +1 (most positive)
-    - Positive: Proportion of text that is positive
-    - Negative: Proportion of text that is negative
-    - Neutral: Proportion of text that is neutral
-    """
     compound = scores['compound']
     explanation = (
         f"Sentiment Scores Explanation:\n\n"
@@ -29,20 +22,7 @@ def get_sentiment_explanation(scores):
     return explanation
 
 def second():
-    """
-    Analyze sentiment of transcribed text
     
-    Process:
-    1. Initialize VADER sentiment analyzer
-    2. Read transcribed text from input.txt
-    3. Calculate sentiment scores using VADER
-    4. Return sentiment classification, compound score, and detailed explanation.
-    
-    Returns:
-    - sentiment: String indicating positive/negative/neutral
-    - compound_score: Float between -1 and 1
-    - explanation: Detailed explanation of all scores
-    """
     # Initialize VADER analyzer
     analyzer = SentimentIntensityAnalyzer()
     
