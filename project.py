@@ -109,7 +109,7 @@ def process_video():
 # Create main window
 root = Tk()
 root.title("Video Sentiment Analyzer Window")
-root.geometry("600x270")  
+root.geometry("700x300")  
 
 # Style
 style = Style()
@@ -124,8 +124,8 @@ frame.pack(fill=BOTH, expand=True)
 Label(frame, text="Video Sentiment Analyzer", style="Heading.TLabel").pack(pady=10)
 Label(frame, text="Enter the path to your video file:").pack()
 
-entry = Entry(frame, width=60)
-entry.pack(pady=10, padx=20, fill=X)
+entry = Text(frame, width=60, height=1, font=("Helvetica", 12))
+entry.pack(pady=15, padx=20, fill=X)
 
 Button(frame, text="Process Video", command=process_video, style="Big.TButton").pack(pady=10)
 
