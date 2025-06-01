@@ -44,7 +44,7 @@ def process_video():
         # Show results
         result_window = Toplevel(root)
         result_window.title("Analysis Results")
-        result_window.geometry("800x600")
+        result_window.geometry("800x610")
         
         # Make window stay on top but allow minimizing
         result_window.attributes('-topmost', True)
