@@ -2,11 +2,8 @@ import os
 import logging
 import tkinter as tk
 from tkinter import messagebox, ttk
-from ver import first
+from ver import first  
 from senti import second
-
-# Configure logging
-logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 
 
 def process_video():
@@ -44,65 +41,55 @@ def process_video():
         logging.info(f"Compound Score: {score:.3f}")
 
         # Show results window
+        # --- Updated Results Window (Centered, No Scrollbar) ---
         result_window = tk.Toplevel(root)
         result_window.title("Analysis Results")
-        result_window.geometry("800x610")
+        result_window.geometry("800x700")
 
         # Window behavior
         result_window.attributes('-topmost', True)
         result_window.focus_force()
 
-        # Create a frame with scrollbar
-        main_frame = ttk.Frame(result_window)
-        main_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+        # Main container that fills the window and centers content
+        # Using a frame with padding to act as the central wrapper
+        main_frame = ttk.Frame(result_window, padding="10")
+        main_frame.pack(fill=tk.BOTH, expand=True)
 
-        canvas = tk.Canvas(main_frame)
-        scrollbar = ttk.Scrollbar(
-            main_frame, orient=tk.VERTICAL, command=canvas.yview)
-        scrollable_frame = ttk.Frame(canvas)
+        # 1. Transcription Section
+        ttk.Label(main_frame, text="Video Transcription:",
+                  style="Heading.TLabel").pack(pady=(10, 5), anchor="center")
 
-        scrollable_frame.bind(
-            "<Configure>",
-            lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
-        )
-
-        canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
-        canvas.configure(yscrollcommand=scrollbar.set)
-
-        # Transcription section
-        ttk.Label(scrollable_frame, text="Video Transcription:",
-                  style="Heading.TLabel").pack(pady=10)
-        transcription_text = tk.Text(
-            scrollable_frame, wrap=tk.WORD, height=10, width=80)
-        transcription_text.pack(padx=10, fill=tk.X)
+        transcription_text = tk.Text(main_frame, wrap=tk.WORD, height=8, width=70,
+                                     font=("Helvetica", 10))
+        transcription_text.pack(pady=5, padx=10)
         transcription_text.insert("1.0", transcription)
         transcription_text.config(state=tk.DISABLED)
 
-        # Overall Sentiment section
-        ttk.Label(scrollable_frame, text="Overall Sentiment:",
-                  style="Heading.TLabel").pack(pady=10)
-        ttk.Label(scrollable_frame,
-                  text=f"{sentiment} (Compound Score: {score:.3f})").pack()
+        # 2. Overall Sentiment Section
+        ttk.Label(main_frame, text="Overall Sentiment:",
+                  style="Heading.TLabel").pack(pady=(10, 5), anchor="center")
 
-        # Detailed Sentiment Analysis section
-        ttk.Label(scrollable_frame, text="Detailed Analysis:",
-                  style="Heading.TLabel").pack(pady=10)
-        explanation_text = tk.Text(
-            scrollable_frame, wrap=tk.WORD, height=12, width=80)
-        explanation_text.pack(padx=10, fill=tk.X)
+        sentiment_display = ttk.Label(main_frame,
+                                      text=f"{sentiment}\n(Compound Score: {score:.3f})",
+                                      font=("Helvetica", 11, "bold"), justify="center")
+        sentiment_display.pack(pady=5, anchor="center")
+
+        # 3. Detailed Sentiment Analysis section
+        ttk.Label(main_frame, text="Detailed Analysis:",
+                  style="Heading.TLabel").pack(pady=(20, 5), anchor="center")
+
+        explanation_text = tk.Text(main_frame, wrap=tk.WORD, height=12, width=70,
+                                   font=("Helvetica", 10), bg="#f9f9f9")
+        explanation_text.pack(pady=5, padx=10)
         explanation_text.insert("1.0", explanation)
         explanation_text.config(state=tk.DISABLED)
 
-        # Layout scrollbar and canvas
-        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-        canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        # 4. Close button
+        close_button = ttk.Button(main_frame, text="Close",
+                                  command=result_window.destroy, style="Big.TButton")
+        close_button.pack(pady=10, anchor="center")
 
-        # Close button
-        close_button = ttk.Button(
-            result_window, text="Close", command=result_window.destroy)
-        close_button.pack(pady=10)
-
-        # Center the window
+        # Center the window on the screen
         result_window.update_idletasks()
         width = result_window.winfo_width()
         height = result_window.winfo_height()
@@ -132,22 +119,19 @@ style.configure("Big.TButton", font=("Helvetica", 10, "bold"), padding=10)
 main_container = ttk.Frame(root, padding="20")
 main_container.pack(fill=tk.BOTH, expand=True)
 
-ttk.Label(main_container, text="Video Sentiment Analyzer",
-          style="Heading.TLabel").pack(pady=10)
+ttk.Label(main_container, text="Video Sentiment Analyzer",style="Heading.TLabel").pack(pady=10)
 ttk.Label(main_container, text="Enter the path to your video file:").pack()
 
 entry = ttk.Entry(main_container, font=("Helvetica", 12))
 entry.pack(pady=15, padx=20, fill=tk.X)
 
-ttk.Button(main_container, text="Process Video",
-           command=process_video, style="Big.TButton").pack(pady=10)
+ttk.Button(main_container, text="Process Video",command=process_video, style="Big.TButton").pack(pady=10)
 
 # Status bar area
 status_frame = ttk.Frame(main_container)
 status_frame.pack(fill=tk.X, pady=10)
 
-status_label = ttk.Label(status_frame, text="Ready",
-                         style="Status.TLabel", anchor="center")
+status_label = ttk.Label(status_frame, text="Ready",style="Status.TLabel", anchor="center")
 status_label.pack(expand=True, fill=tk.X)
 
 if __name__ == "__main__":
