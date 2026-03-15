@@ -1,4 +1,4 @@
-from moviepy.editor import VideoFileClip
+from moviepy import VideoFileClip
 import speech_recognition as sr
 import os
 import wave
@@ -69,7 +69,8 @@ def first(file_path):
         logging.info(f"Starting transcription for video: {file_path}")
         
         # Extract audio from video
-        clip = VideoFileClip(file_path).subclip(0,60)
+        clip = VideoFileClip(file_path)
+        clip = clip.subclipped(0, min(60, clip.duration))
         audio_file = "theaudio.wav"
         clip.audio.write_audiofile(audio_file)
         logging.info(f"Audio extracted and saved as: {audio_file}")

@@ -124,7 +124,7 @@ frame.pack(fill=BOTH, expand=True)
 Label(frame, text="Video Sentiment Analyzer", style="Heading.TLabel").pack(pady=10)
 Label(frame, text="Enter the path to your video file:").pack()
 
-entry = Text(frame, width=60, height=1, font=("Helvetica", 12))
+entry = Entry(frame, width=60, font=("Helvetica", 12))
 entry.pack(pady=15, padx=20, fill=X)
 
 Button(frame, text="Process Video", command=process_video, style="Big.TButton").pack(pady=10)
